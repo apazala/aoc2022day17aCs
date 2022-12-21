@@ -115,7 +115,9 @@
                 stillFalling = ValidFallAndInsertIfNot(currRock, chamber, x, ref y);
             }
 
-            highestRock = UpdateHighestRock(chamber, highestRock);
+            y = y+currRock.H-1;
+            if(y > highestRock)
+                highestRock = y;
         }
 
         //PlotChamber(chamber);
@@ -141,16 +143,6 @@
         }
 
         Console.WriteLine('+');
-    }
-
-    private static int UpdateHighestRock(List<byte> chamber, int highestRock)
-    {
-        for (int y = Math.Max(0, highestRock - 4), limit = Math.Min(highestRock + 5, chamber.Count); y < limit; y++)
-        {
-            if (chamber[y] != 0)
-                highestRock = y;
-        }
-        return highestRock;
     }
 
     private static bool ValidFallAndInsertIfNot(Rock currRock, List<byte> chamber, int x, ref int y)
